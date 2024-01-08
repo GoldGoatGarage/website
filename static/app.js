@@ -235,6 +235,10 @@ document.addEventListener("click", async (e) => {
     crossClose = () => {
       back();
       gallery.querySelector(".close").removeEventListener("click", crossClose);
+      let url = window.location.href;
+      if (url.indexOf("#") > 0) {
+        back();
+      }
     };
 
     gallery
