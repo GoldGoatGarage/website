@@ -6,6 +6,8 @@ const list = document.querySelector(".nav-items"),
   burger = document.querySelector(".burger"),
   navbar = document.querySelector(".navbar");
 
+const gallery = document.querySelector(".open-gallery");
+
 // SCROLL TO THE TOP WHEN OPEN WEBSITE
 document.addEventListener("animationend", (e) => {
   if (e.animationName === "open") {
@@ -155,9 +157,12 @@ document.addEventListener("click", async (e) => {
     e.target.parentNode.classList.contains("segment") ||
     e.target.classList.contains("segment")
   ) {
+    // remove all existing event listeners to close gallery - needed to close properly
+    document.removeEventListener("keydown", esc);
+    gallery.querySelector(".close").removeEventListener("click", crossClose);
     if (
-      e.target.parentNode.classList.contains("forth") ||
-      e.target.classList.contains("forth")
+      e.target.parentNode.classList.contains("movie") ||
+      e.target.classList.contains("movie")
     ) {
       return;
     }
@@ -174,8 +179,7 @@ document.addEventListener("click", async (e) => {
     if (e.target.parentNode.classList.contains("segment"))
       img = e.target.parentNode.querySelector("IMG");
 
-    console.log(e.target);
-    const gallery = document.querySelector(".open-gallery");
+    // console.log(e.target);
 
     gallery.style.background = `url(${img.src}) no-repeat black`;
     gallery.style.backgroundPosition = `center`;
@@ -183,11 +187,12 @@ document.addEventListener("click", async (e) => {
 
     // find folder name in src of an image
     const folder = img.src.split("/").at(-2);
-    console.log(folder);
+    // console.log(folder);
 
     // get names of pictures in folder
     const list_of_photos = await getPhotosList(folder);
-    const infoText = await getInfoText(folder);
+    //long description
+    await injectLogoIfLongText(await getInfoText(folder), folder);
 
     // sets first image to display
     const mainImage = gallery.querySelector(".main-photo img");
@@ -195,7 +200,7 @@ document.addEventListener("click", async (e) => {
     // sets title of a project
     gallery.querySelector(".text .title").innerText =
       e.target.parentElement.querySelector("h2").innerText;
-    gallery.querySelector(".text .description").innerHTML = infoText;
+
     // creates gallery image right after load of chosen project
     mainImage.addEventListener(
       "load",
@@ -207,18 +212,17 @@ document.addEventListener("click", async (e) => {
 
     gallery.scrollTop = 0;
 
-    function back() {
-      history.back();
-      console.log("here");
-    }
-
     function closeGallery() {
       gallery.querySelector(".close").removeEventListener("click", crossClose);
       document.removeEventListener("keydown", esc);
       gallery.style.removeProperty(...["background"]);
       gallery.classList.remove("gallery-visible");
-      let url = window.location.href;
-      window.location.hash = "";
+      let preCloseHash = window.location.hash;
+      // console.log(preCloseHash);
+      window.location.hash =
+        preCloseHash.indexOf("#gallery") > -1
+          ? preCloseHash.substring(0, preCloseHash.indexOf("#gallery"))
+          : preCloseHash;
     }
 
     // close gallery on back browser button
@@ -227,14 +231,6 @@ document.addEventListener("click", async (e) => {
       if (window.location.href.indexOf("#gallery") < 0) {
         closeGallery();
       }
-    };
-
-    // event listener to close button
-
-    crossClose = () => {
-      back();
-      gallery.querySelector(".close").removeEventListener("click", crossClose);
-      let url = window.location.href;
     };
 
     gallery
@@ -251,16 +247,6 @@ document.addEventListener("click", async (e) => {
     };
     gallery.addEventListener("keydown", arrowsReation);
 
-    esc = (e) => {
-      if (e.key === "Escape") {
-        if (document.location.hash.indexOf("#gallery") >= 0) {
-          back();
-        }
-        if (!gallery.classList.contains("gallery-visible")) {
-          document.removeEventListener("keydown", esc);
-        }
-      }
-    };
     document.addEventListener("keydown", esc, { once: true });
 
     //event listener to forward button
@@ -340,7 +326,7 @@ async function getInfoText(folder) {
   const response = await fetch(`/static/images/${folder}/info.json`)
     .then((response) => response.json())
     .then((data) => data["info"]);
-  return response;
+  return response[0];
 }
 
 document.querySelector("#location").addEventListener("click", (e) => {
@@ -348,3 +334,78 @@ document.querySelector("#location").addEventListener("click", (e) => {
     "https://www.google.pl/maps/place/Gold+Goat+Garage/@51.3753642,16.9402092,17z/data=!3m1!4b1!4m6!3m5!1s0x470f8dd03f1238d1:0xa53db5587399eaef!8m2!3d51.3753642!4d16.9427841!16s%2Fg%2F11v0_gb97v?entry=ttu"
   );
 });
+
+// close functions!
+
+esc = (e) => {
+  if (e.key === "Escape") {
+    if (document.location.hash.indexOf("#gallery") >= 0) {
+      back();
+    }
+    if (!gallery.classList.contains("gallery-visible")) {
+      document.removeEventListener("keydown", esc);
+    }
+  }
+};
+
+crossClose = () => {
+  back();
+  gallery.querySelector(".close").removeEventListener("click", crossClose);
+  let url = window.location.href;
+};
+
+function back() {
+  history.back();
+}
+
+getAspectRatio = (img) => {
+  return img.naturalWidth / img.naturalHeight;
+};
+
+injectLogoIfLongText = async (infoText, folderPath) => {
+  // injects img html with logo to the longer text
+  let adder = 300;
+  let node = gallery.querySelector(".text .description");
+  node.innerHTML = infoText;
+  let nodeHeight = node.clientHeight;
+  let pointerPixels = 60;
+  if (nodeHeight > 250) {
+    let imageHTML = '<img src="/static/images/logo.png" class="floatImage"/>';
+    logoHeight = 100;
+    do {
+      let wordsArr = infoText.split(" ");
+      let wordPointer = Math.floor(
+        (pointerPixels / nodeHeight) * wordsArr.length
+      );
+      wordsArr.splice(wordPointer, 0, imageHTML);
+      infoText = wordsArr.join(" ");
+      node.innerHTML = infoText;
+      nodeHeight = node.clientHeight;
+      pointerPixels += adder;
+      logoHeight = node.querySelector("IMG").clientHeight + 20;
+    } while (pointerPixels < nodeHeight - logoHeight);
+
+    let nominalPhotoArr = await getPhotosList(folderPath);
+
+    let photosArr = [...nominalPhotoArr];
+    var imgArr = Array.from(node.querySelectorAll("IMG"));
+    imgArr.forEach((image, index) => {
+      if (!index == 0) {
+        image.src = `/static/images/${folderPath}/${photosArr.splice(
+          getRandomInt(photosArr.length),
+          1
+        )}`;
+      }
+      if ((index + 1) % 2 == 0) {
+        image.classList.add("floatRight");
+      }
+      if (photosArr.length == 0) {
+        photosArr = nominalPhotoArr;
+      }
+    });
+  }
+};
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
