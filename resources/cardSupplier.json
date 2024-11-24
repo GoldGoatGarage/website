@@ -1,5 +1,14 @@
 [
   {
+    "cardName": "Yamaha TW125 Little Patriot",
+    "pathToInfo": "../static/images/Yamaha_TW125_Little_Patriot",
+    "cardPhoto": "../static/images/Yamaha_TW125_Little_Patriot/1.jpg",
+    "isMovie": false,
+    "theme": "dark",
+    "shortText": "&ensp;Świat motocykli customowych to nie tylko elegancja, sznyt, błysk i chrom. To także projekty mające za zadanie fundowanie dobrej zabawy i wywołanie szerokiego uśmiechu. Nasz TW125 „Little Patriot” świetnie się sprawdza zarówno na co dzień w poruszaniu się po miejskiej dżungli jak i na nieutwardzonych ścieżkach, nie zawsze „legalnego” wjazdu - co udowadnia na zdjęciach.",
+    "index": 9
+  },
+  {
     "cardName": "Honda CM400T RocketMouse",
     "pathToInfo": "../static/images/Honda_CM400_RocketMouse",
     "cardPhoto": "../static/images/Honda_CM400_RocketMouse/2.jpg",
