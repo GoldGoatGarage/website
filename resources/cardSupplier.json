@@ -1,5 +1,23 @@
 [
   {
+    "cardName": "Harley Davidson OldBanana",
+    "pathToInfo": "../static/images/Harley_Davidson_OldBanana _WLA _41",
+    "cardPhoto": "../static/images/Harley_Davidson_OldBanana _WLA _41/1.jpg",
+    "isMovie": false,
+    "theme": "light",
+    "shortText": "&ensp;A co gdybym powiedział Wam, że silnik pamięta dołączenie Ameryki do drugiej wojny światowej, skrzynia biegów wielki bum gospodarczy Anglii lat '50 a malowanie wykonane było 2 miesiące temu? W tym projekcie staraliśmy się połączyć typowego \"Barnfind'a\" z błyskiem nowego chromu. Silnik z HD WL oraz skrzynia biegów z motocykla Panther 500 ubrane w świeże elementy. Odpal, usiądź, wbij bieg i przenieś się w czasie…",
+    "index": 11
+  },
+  {
+    "cardName": "Honda CX500 Jaco",
+    "pathToInfo": "../static/images/Honda_CX500_Jaco",
+    "cardPhoto": "../static/images/Honda_CX500_Jaco/1.jpg",
+    "isMovie": false,
+    "theme": "dark",
+    "shortText": "&ensp;Kultowy już CX w naszym wydaniu. Jeden z bardziej \"cywilizowanych” projektów z naszego garażu. Spójna bryła, klasyczne malowanie, dużo charakterystycznych detali i nasza koza zamykająca projekt. Projekt nie ma szokować, ma pokazać, że klasyka może się nie starzeć i dobrze wyglądać z każdej strony.",
+    "index": 10
+  },
+  {
     "cardName": "Yamaha TW125 Little Patriot",
     "pathToInfo": "../static/images/Yamaha_TW125_Little_Patriot",
     "cardPhoto": "../static/images/Yamaha_TW125_Little_Patriot/1.jpg",
@@ -22,7 +40,7 @@
     "pathToInfo": "../static/images/Yamaha_XJ600_3KM_Tomato_Board_Tracker",
     "cardPhoto": "../static/images/Yamaha_XJ600_3KM_Tomato_Board_Tracker/1.jpg",
     "isMovie": false,
-    "theme": "dark",
+    "theme": "light",
     "shortText": "&ensp;Klasyczny Board Trucker w nowoczesnej odsłonie. Mocno zmodyfikowana rama, przednie zawieszenie skrócone o 12 cm, tylne o 8 cm. Siodło wykonane pod indywidualne zamówienie, clip-ony i klasyczne opony. Mocno zmodyfikowana wiązka elektryczna tak by motocykl wyglądał estetycznie i nic nie kłóciło się z surowy wyglądem.",
     "index": 7
   },
@@ -42,7 +60,7 @@
     "pathToInfo": "../static/images/Yamaha_XJ900_Diversion_SummerBee",
     "cardPhoto": "../static/images/Yamaha_XJ900_Diversion_SummerBee/1.jpg",
     "isMovie": false,
-    "theme": "light",
+    "theme": "dark",
     "shortText": "&ensp;W świecie customowych motocykli jest grupa modeli które, z założenia nie są wdzięcznym tematem do przeróbek. Jednym z takich motocykli jest Yamaha XJ 900 Diversion. Trochę przyciężka, trochę za klasyczna i bez polotu. Powstała bulwarówka pełną gębą. Jest mocno, jest grubo, jest głośno i krzykliwie. Nie da się jej nie zauważyć, nie da się przejść obojętnie.<br>&ensp;Lato, lato wszędzie... niech nadejdzie.",
     "index": 5
   },
@@ -69,7 +87,7 @@
     "pathToInfo": "../static/images/Yamaha_XJ_600_Diversion_White_Street_Tracker",
     "cardPhoto": "../static/images/Yamaha_XJ_600_Diversion_White_Street_Tracker/1.JPG",
     "isMovie": false,
-    "theme": "dark",
+    "theme": "light",
     "shortText": "&ensp;Jednoosobowe siodło, grube opony w stylu enduro, szeroka kierownica z poprzeczką oraz gumowe mieszki osłaniające lagi spowodowały, że niepozorny motocykl zyskał na wyrazistości. W serii motocykl wygląda jak wszystkie, po modernizacji nie da się obok niego przejść obojętnie.",
     "index": 2
   },
